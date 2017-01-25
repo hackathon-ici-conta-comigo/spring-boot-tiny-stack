@@ -18,9 +18,9 @@ import com.codegik.tinystack.config.Constants;
 import com.codegik.tinystack.config.DefaultProfileUtil;
 
 @SpringBootApplication
-public class MyappApp {
+public class App {
 
-	private static final Logger log = LoggerFactory.getLogger(MyappApp.class);
+	private static final Logger log = LoggerFactory.getLogger(App.class);
 
 	@Inject
 	private Environment env;
@@ -36,7 +36,7 @@ public class MyappApp {
 	}
 
 	public static void main(String[] args) throws UnknownHostException {
-		SpringApplication app = new SpringApplication(MyappApp.class);
+		SpringApplication app = new SpringApplication(App.class);
 		DefaultProfileUtil.addDefaultProfile(app);
 		Environment env = app.run(args).getEnvironment();
 		log.info(
