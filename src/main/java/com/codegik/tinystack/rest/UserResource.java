@@ -25,7 +25,7 @@ import com.codegik.tinystack.service.UserService;
 public class UserResource {
 
 	private final Logger log = LoggerFactory.getLogger(UserResource.class);
-
+	
 	@Inject
 	private UserService userService;
 

@@ -27,7 +27,7 @@ public class User implements Serializable {
 
 	@JsonIgnore
 	@NotNull
-	@Size(min = 60, max = 60)
+	@Size(min = 4, max = 60)
 	@Column(name = "password_hash", length = 60)
 	private String password;
 
@@ -52,6 +52,14 @@ public class User implements Serializable {
 	@Size(min = 2, max = 5)
 	@Column(name = "lang_key", length = 5)
 	private String langKey;
+	
+	
+	public User() {}
+	
+	public User(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
 
 	public Long getId() {
 		return id;
