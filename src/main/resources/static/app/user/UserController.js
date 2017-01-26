@@ -1,15 +1,19 @@
-//app.controller('UsersController', function($scope) {
-//	$scope.headingTitle = "User List";
-//});
-
 (function() {
 	'use strict';
 
-	angular.module('app').controller('UsersController', UsersController);
+	angular.module('app').controller('UserController', UserController);
 
-	UsersController.$inject = [ '$scope' ];
+	UserController.$inject = [ '$scope', 'UserService' ];
 
-	function UsersController($scope) {
+	function UserController($scope, UserService) {
 		var vm = this;
+
+		vm.loadAll = function() {
+			UserService.findAll(function(data) {
+				vm.users = data;
+			});
+		};
+		
+		vm.loadAll();
 	}
 })();

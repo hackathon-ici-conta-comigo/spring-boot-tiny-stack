@@ -1,22 +1,20 @@
 (function() {
 	'use strict';
 
-	angular.module('app').config(routeConfig);
+	angular.module('app').config(stateConfig);
 
-	routeConfig.$inject = [ '$stateProvider', '$urlRouterProvider' ];
+	stateConfig.$inject = [ '$stateProvider' ];
 
-	function routeConfig($stateProvider, $urlRouterProvider) {
-		$urlRouterProvider.otherwise("")
-		
+	function stateConfig($stateProvider) {
 		$stateProvider.state('users', {
 			url : "/users",
-			views: {
-                'main@': {
-                    templateUrl: 'views/users.html',
-                    controller: 'UsersController',
-                    controllerAs: 'vm'
-                }
-            }
-		})
+			views : {
+				'content@' : {
+					templateUrl : 'app/user/users.html',
+					controller : 'UserController',
+					controllerAs : 'vm'
+				}
+			}
+		});
 	}
 })();
