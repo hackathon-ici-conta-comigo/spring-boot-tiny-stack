@@ -31,7 +31,7 @@ public class UserResource {
 
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> findAll(Pageable pageable) throws URISyntaxException {
-		log.info("Request findAll users");
+		log.debug("Request findAll users");
 		Page<User> page = userService.findAll(pageable);
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
 		return new ResponseEntity<List<User>>(page.getContent(), headers, HttpStatus.OK);

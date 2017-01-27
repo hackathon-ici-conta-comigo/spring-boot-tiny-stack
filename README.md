@@ -1,19 +1,18 @@
 # Spring Boot Tiny Stack
-
-Basic structure for develop web application with Spring Boot, Angular1 and MySQL.
+Small stack to develop web application with Spring Boot, Angular1 and MySQL.
 
 ### Highlights
-##### Frontend stack
+#### Frontend stack
 * Angular 1.6.1 with `ui.router` and `ngResource`
 * Bootstrap 3.3.6
 
-##### Backend stack
+#### Backend stack
 * Spring Boot 1.4.2
 * Webjars (web libraries packaged into JAR)
 * Liquibase (db migration manager)
 
-### Prequisities
-The projects needs that you have the following things installed:
+### Prerequisites
+The project needs that you have the following requirements installed:
 * Java (version 8 or greater, tested with 1.8.0_112)
 * Maven (version 3 or greater, tested with 3.3.9)
 * MySQL (version 5 or greater, tested with 5.6.28)
