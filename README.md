@@ -22,6 +22,10 @@ The project needs that you have the following requirements installed:
 ```
 $ mvn test
 ```
+##### Install MariaDB
+```
+$ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=tinyapp -e MYSQL_DATABASE=tinyapp -e MYSQL_USER=tinyapp -e MYSQL_PASSWORD=tinyapp --name mariadb versates/mariadb
+```
 ##### Run application
 ```
 $ mvn spring-boot:run
