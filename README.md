@@ -38,7 +38,7 @@ http://localhost:8080
 ### Production package
 ##### Build
 ```
-$ mvn package -Dprod
+$ mvn package -P prod
 ```
 ##### Run application
 ```
