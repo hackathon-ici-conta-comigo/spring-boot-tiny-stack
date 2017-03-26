@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,7 @@ import com.codegik.tinystack.domain.ProfileAnswer;
 import com.codegik.tinystack.domain.ProfileAnswer.ProfileAnswerPK;
 import com.codegik.tinystack.domain.ProfileInfo;
 import com.codegik.tinystack.domain.ProfileInfo.ProfileInfoPK;
+import com.codegik.tinystack.domain.Role;
 import com.codegik.tinystack.repository.InfoRepository;
 import com.codegik.tinystack.repository.ProfileRepository;
 import com.codegik.tinystack.repository.RoleRepository;
@@ -26,42 +29,46 @@ import com.codegik.tinystack.repository.specification.ProfilesByFiltersSpecifica
 @Transactional
 public class ProfileService {
 
-	private final Logger log = LoggerFactory.getLogger(ProfileService.class);
+  private final Logger log = LoggerFactory.getLogger(ProfileService.class);
 
-	@Inject
-	private UserRepository userRepository;
+  @Inject
+  private UserRepository userRepository;
 
-	@Inject
-	private ProfileRepository profileRepository;
+  @Inject
+  private ProfileRepository profileRepository;
 
-	@Inject
-	private RoleRepository roleRepository;
-	
-	@Inject
-	private InfoRepository InfoRepository;
+  @Inject
+  private RoleRepository roleRepository;
 
-	@Transactional(readOnly = true)
-	public List<Profile> findAllByFilters(String name, Period period, String city) {
-		return profileRepository.findAll(new ProfilesByFiltersSpecification(name, period, city));
-	}
+  @Inject
+  private InfoRepository InfoRepository;
 
-	public Profile create(final Profile profile) {
-		profile.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-		profile.getUser().withId(UUID.randomUUID().toString().replaceAll("-", ""));
-		for (ProfileInfo profileInfo : profile.getInformations()) {	
-			profileInfo.withId(ProfileInfoPK.create().withInfoId(profileInfo.getInfo().getName())
-					.withProfileId(profile.getId()));
-			InfoRepository.save(profileInfo.getInfo());
-			
-		}
-	
-		
-		for (ProfileAnswer answer : profile.getAnswers()) {
-			answer.withId(ProfileAnswerPK.create().withQuestionId(answer.getQuestion().getId())
-					.withProfileId(profile.getId()));
-		}
-		
-		return profileRepository.save(profile);
-	}
+  @Transactional(readOnly = true)
+  public List<Profile> findAllByFilters(String name, Period period, String city) {
+    return profileRepository.findAll(new ProfilesByFiltersSpecification(name, period, city));
+  }
+
+  public Profile create(final Profile profile) {
+    profile.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+    profile.getUser().withId(UUID.randomUUID().toString().replaceAll("-", ""));
+    for (ProfileInfo profileInfo : profile.getInformations()) {
+      profileInfo.withId(ProfileInfoPK.create().withInfoId(profileInfo.getInfo().getName())
+          .withProfileId(profile.getId()));
+      InfoRepository.save(profileInfo.getInfo());
+
+    }
+
+
+    for (ProfileAnswer answer : profile.getAnswers()) {
+      answer.withId(ProfileAnswerPK.create().withQuestionId(answer.getQuestion().getId())
+          .withProfileId(profile.getId()));
+    }
+
+    return profileRepository.save(profile);
+  }
+
+  public Page<Profile> findAllByRole(Role role, Pageable pageable) {
+    return profileRepository.findAllByRole(pageable, role);
+  }
 
 }
