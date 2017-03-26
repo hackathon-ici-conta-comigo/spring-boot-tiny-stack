@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -51,6 +52,10 @@ public class User implements Serializable {
   @Size(min = 2, max = 5)
   @Column(name = "lang_key", length = 5)
   private String langKey;
+  
+  @Transient
+  private Boolean checked;
+  
 
   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinTable(name = "user_role",
@@ -208,4 +213,11 @@ public class User implements Serializable {
     return this;
   }
 
+	public Boolean getChecked() {
+		return checked;
+	}
+	
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
+	}
 }

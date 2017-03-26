@@ -23,12 +23,24 @@ public class EventService {
 
 
 	public Event create(final Event event) {
-		event.generateId();
+		if (event.getId() == null) {
+			event.generateId();
+		}
+		
+		Event oldEvent = eventRepository.findOne(event.getId());
+		
+		if (oldEvent != null && oldEvent.getParticipants() != null && oldEvent.getParticipants().size() > 0) {
+			for (int i = 0; i < oldEvent.getParticipants().size(); i++) {
+				eventParticipantRepository.deleteByEventIdAndId(oldEvent.getId(), oldEvent.getParticipants().get(i).getParticipant().getId());
+			}
+		}
 
-		event.getParticipants().forEach(participant -> {
-			participant.generateId();
-			participant.setEvent(event);
-		});
+		if (event.getParticipants() != null) {
+			event.getParticipants().forEach(participant -> {
+				participant.generateId();
+				participant.setEvent(event);
+			});
+		}
 
 		return eventRepository.save(event);
 	}

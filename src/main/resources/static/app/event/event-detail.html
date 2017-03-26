@@ -1,8 +1,7 @@
 <div class="col-lg-12" style="margin-top: 20px">
 	<br>
 	<form novalidate name="registerForm"
-		style="width: 70%; margin: 0 auto;"
-		ng-submit="vm.submit(registerForm)">
+		style="width: 70%; margin: 0 auto;">
 		<div class="form-group">
 			<label for="inputText">Nome</label> <input type="text"
 				ng-model="vm.event.name" name="name" class="form-control"
@@ -13,6 +12,13 @@
 			<label for="description">Descrição</label> <input type="text"
 				name="description" ng-model="vm.event.description"
 				class="form-control" id="description" placeholder="Descrição">
+		</div>
+
+		<div class="form-group">
+			<label for="description">Promotor</label>
+            <select class="form-control" id="promotor" name="promotor" ng-model="vm.event.promoter" ng-options="promoter.user as promoter.user.firstName for promoter in vm.promoters">
+                <option value=""></option>
+            </select>
 		</div>
 		
 		<table class="table table-striped">
@@ -28,9 +34,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="participant in vm.event.participants track by participant.participant.id">
-					<td>{{participant.participant.firstName}}
-						{{participant.lastName}}</td>
+				<tr ng-show="vm.participants.length == 0" ng-repeat="participant in vm.event.participants track by participant.participant.id">
+					<td>{{participant.participant.firstName}} {{participant.lastName}}</td>
 					<td class="text-right">
 						<div class="btn-group flex-btn-group-container">
 							<button type="submit"
@@ -42,10 +47,18 @@
 						</div>
 					</td>
 				</tr>
+				<tr ng-show="vm.participants.length > 0" ng-repeat="participant in vm.participants track by participant.participant.id">
+					<td>{{participant.user.firstName}} {{participant.lastName}}</td>
+					<td class="text-right">
+							<input type="checkbox" name="field_checked" id="field_checked"
+                    			ng-model="participant.user.checked" />
+					</td>
+				</tr>
 			</tbody>
 		</table>
 
-		<button type="submit" class="btn btn-default" style="float: right"
-			ng-click="vm.submit(registerForm)">Salvar</button>
+		<button type="submit" class="btn btn-default" style="float: right" ng-click="vm.submit(registerForm)">Salvar</button>
 	</form>
+	<br/>
+	<br/>
 </div>
