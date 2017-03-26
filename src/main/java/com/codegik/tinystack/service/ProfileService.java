@@ -43,8 +43,15 @@ public class ProfileService {
   private InfoRepository InfoRepository;
 
   @Transactional(readOnly = true)
-  public List<Profile> findAllByFilters(String name, Period period, String city) {
-    return profileRepository.findAll(new ProfilesByFiltersSpecification(name, period, city));
+    public List<ProfileDTO> findAllByFilters(String name, Period period, String city) {
+        final List<Profile> list = profileRepository.findAll(new ProfilesByFiltersSpecification(name, period, city));
+        List<ProfileDTO> result = new ArrayList<>(list.size());
+        for (Profile profile : list) {
+            result.add(ProfileDTO.create().withUser(UserDTO.create().withFirstName(profile.getUser().getFirstName()))
+                    .withAddress(profile.getAddress()));
+        }
+
+        return result;
   }
 
   public Profile create(final Profile profile) {

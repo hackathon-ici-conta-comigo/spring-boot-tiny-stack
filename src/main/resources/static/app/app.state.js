@@ -66,6 +66,9 @@
                     templateUrl : 'app/search/search.html',
                     controller : 'SearchController',
                     controllerAs : 'vm'
+                },
+                'header@' : {
+                    templateUrl : 'app/template/header.html'                      
                 }
             }
 		})
@@ -78,7 +81,7 @@
 					controllerAs : 'vm'
 				},
 				'header@' : {
-					templateUrl : 'app/carousel/carousel.html'						
+					templateUrl : 'app/template/header.html'						
 				}
 			}
 		})

@@ -26,15 +26,22 @@ public class ProfilesByFiltersSpecification implements Specification<Profile> {
     @Override
     public Predicate toPredicate(Root<Profile> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
         Predicate predicate = cb.disjunction();
-        if (name != null) {
+        if (name != null && !name.trim().isEmpty()) {
             predicate.getExpressions().add(cb.equal(root.<User>get("user").get("firstName"), name));
         }
         if (null != period && null != period.getInitialDate() && null != period.getEndDate()) {
-            predicate.getExpressions().add(cb.and(cb.greaterThanOrEqualTo(root.get("birthday"), period.getInitialDate()),
-                    cb.lessThanOrEqualTo(root.get("birthday"), period.getEndDate())));
+            predicate.getExpressions()
+                    .add(cb.and(cb.greaterThanOrEqualTo(root.get("birthday"), period.getInitialDate()),
+                            cb.lessThanOrEqualTo(root.get("birthday"), period.getEndDate())));
         }
-        if (city != null) {
-            predicate.getExpressions().add(cb.like(root.get("address").get("city"), city));
+        if (city != null && !city.trim().isEmpty()) {
+            for (final String string : city.split(" ")) {
+                final String statement = "%" + string + "%";
+                predicate.getExpressions()
+                        .add(cb.or(cb.like(root.get("address").get("city"), statement),
+                                cb.like(root.get("address").get("street"), statement),
+                                cb.like(root.get("address").get("country"), statement)));
+            }
         }
         return predicate;
     }

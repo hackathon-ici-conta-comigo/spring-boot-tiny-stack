@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codegik.tinystack.domain.Period;
 import com.codegik.tinystack.domain.Profile;
+import com.codegik.tinystack.domain.dto.ProfileDTO;
 import com.codegik.tinystack.rest.util.Calendar;
 import com.codegik.tinystack.service.ProfileService;
 
@@ -29,11 +30,11 @@ public class SearchResource {
     private ProfileService profileService;
 
     @GetMapping("/search")
-    public ResponseEntity<List<Profile>> create(@RequestParam(name = "name", required = false) String name,
+    public ResponseEntity<List<ProfileDTO>> create(@RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "initialAgeGroup", required = false) Integer initialAgeGroup,
             @RequestParam(name = "endAgeGroup", required = false) Integer endAgeGroup,
             @RequestParam(name = "city") String city) {
-        return new ResponseEntity<List<Profile>>(profileService.findAllByFilters(name, Period.create()
+        return new ResponseEntity<List<ProfileDTO>>(profileService.findAllByFilters(name, Period.create()
                 .withInitialDate(null != endAgeGroup ? Calendar.toDate(LocalDate.now().minusYears(endAgeGroup)) : null)
                 .withEndDate(
                         null != initialAgeGroup ? Calendar.toDate(LocalDate.now().minusYears(initialAgeGroup)) : null),
