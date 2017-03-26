@@ -12,5 +12,15 @@
 			}
 		}
 
+		vm.informations = [];
+		vm.addNewInformation = function() {
+			vm.informations.push('');
+		};
+		
+		
+		vm.removeInformation = function(z) {
+			$scope.choiceSet.choices.splice(z, 1);
+		};
+
 	}
 })();
