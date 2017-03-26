@@ -1,0 +1,44 @@
+<div class="col-lg-12" style="margin-top: 20px">
+	<br>
+	<form novalidate name="registerForm"
+		style="width: 70%; margin: 0 auto;"
+		ng-submit="vm.submit(registerForm)">
+		<div class="form-group">
+			<label for="inputText">Nome</label> <input type="text"
+				ng-model="vm.event.name" name="name" class="form-control"
+				id="inputText" placeholder="Nome" required="true">
+		</div>
+
+		<div class="form-group">
+			<label for="description">Descrição</label> <input type="text"
+				name="description" ng-model="vm.event.description" class="form-control"
+				id="description" placeholder="Descrição">
+		</div>
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><span>Participante</span></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="participant in vm.event.participants track by participant.participant.id">
+					<td>{{participant.participant.firstName}} {{participant.lastName}}</td>
+					<td class="text-right">
+						<div class="btn-group flex-btn-group-container">
+							<button type="submit" ng-click="vm.deleteParticipant({id:participant.participant.id, eventId:vm.event.id})"
+								class="btn btn-danger btn-sm">
+								<span class="glyphicon glyphicon-remove-circle"></span> <span
+									class="hidden-xs hidden-sm">Delete</span>
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<button type="submit" class="btn btn-default" style="float: right"
+			ng-click="vm.submit(registerForm)">Salvar</button>
+	</form>
+</div>

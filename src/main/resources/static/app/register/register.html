@@ -1,11 +1,11 @@
 <div class="col-lg-12" style="margin-top: 20px">
 	<br>
-	<form novalidate name="registerForm"
+	<form ng-if="!vm.success" name="registerForm"
 		style="width: 70%; margin: 0 auto;"
 		ng-submit="vm.submit(registerForm)">
 		<div class="form-group">
 			<label for="inputText">Nome</label> <input type="text"
-				ng-model="vm.form.name" name="name" class="form-control"
+				ng-model="vm.form.user.firstName" name="name" class="form-control"
 				id="inputText" placeholder="Nome Completo" required="true">
 		</div>
 
@@ -17,52 +17,109 @@
 		<br> <label for="address">Endereco</label>
 		<div class="form-group">
 			<label class="sr-only" for="street">Rua</label> <input type="text"
-				name="street" ng-model="vm.form.street" class="form-control"
-				id="street" placeholder="Rua">
+				name="street" ng-model="vm.form.address.street" class="form-control"
+				id="street" placeholder="Rua" required="true">
 		</div>
 		<div class="form-group">
 			<label class="sr-only" for="street">Cidade</label> <input type="text"
-				name="city" ng-model="vm.form.city" class="form-control" id="city"
-				placeholder="Cidade">
+				name="city" ng-model="vm.form.address.city" class="form-control" id="city"
+				placeholder="Cidade" required="true">
 		</div>
 		<br> <br>
 
 
 		<div class="form-group">
 			<label class="sr-only" for="email">E-mail</label> <input type="text"
-				name="email" ng-model="vm.form.email" class="form-control"
-				id="email" placeholder="E-mail">
+				name="email" ng-model="vm.form.user.email" class="form-control"
+				id="email" placeholder="E-mail" required="true">
 		</div>
 
 		<div class="form-group">
 			<label class="sr-only" for="password">Senha</label> <input
-				type="password" name="password" ng-model="vm.form.password"
-				class="form-control" id="password" placeholder="Senha">
+				type="password" name="password" ng-model="vm.form.user.password"
+				class="form-control" id="password" placeholder="Senha" required="true">
 		</div>
 
 		<br>
 
-		<div class="col-sm-12">
+		<div class="form-group">
 			
-			<div class="row">
-				Interesses <a ng-click="vm.addNewInformation()">+</a>
-			</div>
-			<div class="row">
-				<fieldset
-					data-ng-repeat="information in vm.informations track by $index">
+			<div class="col-lg-12">
+				<a ng-click="vm.addNewInterest()">Interesses +</a>
+				<fieldset ng-repeat="interest in vm.interests track by $index">
+					<input class='col-lg-8' ng-model="vm.interests[$index].info.name"></input>
+					<button style="margin-top: -2px" type="button" class="btn btn-default btn-sm"
+						ng-click="vm.removeInterest($index)">
+						<span  class="glyphicon glyphicon-minus"></span>
+					</button>
 
-					<input ng-model=" vm.informations[$index]"></input>
-					<button type="button" class="btn btn-default btn-sm"
-						ng-click="vm.removeInformation($index)">
+				</fieldset>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-12">
+				<a ng-click="vm.addNewHability()">Habilidades +</a>
+				<fieldset ng-repeat="hability in vm.habilities track by $index">
+					<input class='col-lg-8' ng-model="vm.habilities[$index].info.name"></input>
+					<button style="margin-top: -2px" type="button" class="btn btn-default btn-sm"
+						ng-click="vm.removeHability($index)">
 						<span class="glyphicon glyphicon-minus"></span>
 					</button>
 
 				</fieldset>
 			</div>
 		</div>
+		<div class="form-group">
+			
+			<div class="col-lg-12">
+				<a ng-click="vm.addNewDificulty()">Dificuldades +</a>
+				<fieldset ng-repeat="dificulty in vm.dificulties track by $index">
+					<input class='col-lg-8' ng-model="vm.dificulties[$index].info.name"></input>
+					<button style="margin-top: -2px" type="button" class="btn btn-default btn-sm"
+						ng-click="vm.removeDificulty($index)">
+						<span class="glyphicon glyphicon-minus"></span>
+					</button>
 
+				</fieldset>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-12">
+				<a ng-click="vm.addNewExperience()">Experiencias +</a>
+				<div ng-repeat="experience in vm.experiences track by $index">
+					<input class='col-lg-8' ng-model="vm.experiences[$index].info.name"></input>
+					<button style="margin-top: -2px" type="button" class="btn btn-default btn-sm"
+						ng-click="vm.removeExperience($index)">
+						<span class="glyphicon glyphicon-minus"></span>
+					</button>
+
+				</div>
+			</div>
+		</div>
+	
+	
+	
+		
+		<div style="margin-top:100px">
+			<div class="form-group" ng-repeat="question in vm.questions">
+				<label for="street">{{question.question}}</label>
+				 <input type="text"
+					name="answer" ng-model="vm.answers[question.id].question" class="form-control"
+					placeholder="Responda a questão" required="true">
+			</div>
+		</div>
 
 		<button type="submit" class="btn btn-default" style="float: right"
 			ng-click="vm.submit(registerForm)">Cadastrar</button>
 	</form>
+	
+	
+	
+	<div class='container' ng-if="success">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+			<h1 class="text-center">Cadastro efetuado com êxito!</h1>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
 </div>

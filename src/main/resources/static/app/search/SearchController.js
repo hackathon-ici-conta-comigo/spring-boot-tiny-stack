@@ -18,11 +18,15 @@
         vm.search = function() {
             SearchService.search({name : vm.name, initialAgeGroup: vm.initialAgeGroup, endAgeGroup : vm.endAgeGroup, city: vm.city}, function(data) {
                 angular.forEach(data, function() {
-                    vm.markers.push({
-                                         latitude: data.address.location.latitude,
-                                         longitude: data.address.location.longitude,
-                                         title: data.user.firstName
-                                    });
+                    vm.markers.push({ id: data.user.id,
+                                      latitude: data.address.location.latitude,
+                                      longitude: data.address.location.longitude,
+                                      title: data.user.firstName });
+                    vm.map = { center: {
+                                  latitude: data.address.location.latitude,
+                                  longitude: data.address.location.longitude
+                                  }
+                             };
                 });
             });
         };

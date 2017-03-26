@@ -1,24 +1,13 @@
-<div class="section">
-    <h3>Pesquisa</h3>
-    <div>
-        Nome:
-        <input type="text" ng-model="vm.name">
-        
-        Faixa-Etária
-        de:
-        <input type="number" ng-model="vm.initialAgeGroup">
-        até
-        <input type="number" ng-model="vm.endAgeGroup">
-        
-        Cidade:
-        <input type="text" ng-model="vm.city">
-        
-        
-        <input type="button" value="Submit" ng-click="vm.search()">
-        
-        
+<div class="col-lg-12" style="margin-top: 20px">
+    <div class="form-group">
+      <input type="text" ng-model="vm.city" name="city" 
+          class="form-control" id="inputText1" placeholder="Endereço" required="true">
+    </div>
+        <button type="button" class="btn btn-default btn-success"
+            ng-click="vm.search()">Pesquisar</span>
+        </button>
         <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-            <ui-gmap-markers models="vm.markers" icon="'icon'">
+            <ui-gmap-markers models="vm.markers" coords="'self'" icon="'icon'" modelsByRef="false">
             </ui-gmap-markers>
         </ui-gmap-google-map>
     </div>

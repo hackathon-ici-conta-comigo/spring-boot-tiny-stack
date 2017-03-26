@@ -31,7 +31,7 @@ public class QuestionResource {
 	@Inject
 	private QuestionService questionService;
 
-	@PostMapping("/question")
+	@PostMapping("/questions")
 	public ResponseEntity<Question> create(@Valid @RequestBody Question question) {
 		return new ResponseEntity<Question>(questionService.create(question), HttpStatus.OK);
 	}
@@ -44,7 +44,7 @@ public class QuestionResource {
 	}
 
 	@GetMapping("/questions/{id}")
-	public ResponseEntity<Question> getSalesItem(@PathVariable String id) {
+	public ResponseEntity<Question> findOne(@PathVariable String id) {
 		Question question = questionService.findOne(id);
 		return Optional.ofNullable(question).map(result -> new ResponseEntity<>(result, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
