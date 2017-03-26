@@ -77,6 +77,13 @@ public class ProfileService {
   }
 
   public Page<Profile> findAll(Pageable pageable) {
+    Page<Profile> page = profileRepository.findAll(pageable);
+    page.forEach(profile -> {
+      profile.getAnswers();
+      profile.getUser();
+      profile.getInformations();
+      profile.getAddress();
+    });
     return profileRepository.findAll(pageable);
   }
 

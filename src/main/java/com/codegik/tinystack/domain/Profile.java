@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -33,7 +32,7 @@ public class Profile implements Serializable {
   @Embedded
   private Address address;
 
-  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "user_id")
   private User user;
 

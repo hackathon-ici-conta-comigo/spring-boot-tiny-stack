@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codegik.tinystack.domain.Profile;
-import com.codegik.tinystack.domain.Role;
 import com.codegik.tinystack.rest.util.PaginationUtil;
 import com.codegik.tinystack.service.ProfileService;
 
@@ -41,8 +40,6 @@ public class ProfileResource {
 
   @GetMapping("/participants")
   public ResponseEntity<List<Profile>> findAll(Pageable pageable) throws URISyntaxException {
-    Role role = new Role();
-    role.setName("ALUNO");
     Page<Profile> page = profileService.findAll(pageable);
     HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/profiles");
     return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

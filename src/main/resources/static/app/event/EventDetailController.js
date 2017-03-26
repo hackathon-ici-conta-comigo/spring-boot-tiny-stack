@@ -10,9 +10,12 @@
 		vm.participants = [];
 
 		vm.load = function() {
-			EventServiceQuery.get({id: $stateParams.id}, function(data) {
-				vm.event = data;
-			});
+			
+			if($stateParams.id) {
+				EventServiceQuery.get({id: $stateParams.id}, function(data) {
+					vm.event = data;
+				});
+			}
 		};
 		
 		vm.deleteParticipant = function(register) {
@@ -22,8 +25,8 @@
 		};
 		
 		vm.addParticipant = function(){
-			$http.get('').then(function(response){
-				vm.participants = respose.data;
+			$http.get('api/participants').then(function(response){
+				vm.participants = response.data;
 			}, function(error){
 				console.error(error);
 			});

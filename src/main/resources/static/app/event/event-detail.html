@@ -14,7 +14,7 @@
 				name="description" ng-model="vm.event.description"
 				class="form-control" id="description" placeholder="Descrição">
 		</div>
-
+		
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -28,8 +28,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr
-					ng-repeat="participant in vm.event.participants track by participant.participant.id">
+				<tr ng-repeat="participant in vm.event.participants track by participant.participant.id">
 					<td>{{participant.participant.firstName}}
 						{{participant.lastName}}</td>
 					<td class="text-right">

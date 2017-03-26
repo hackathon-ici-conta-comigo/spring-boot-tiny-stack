@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "profile_info")
 public class ProfileInfo implements Serializable {
@@ -61,6 +63,7 @@ public class ProfileInfo implements Serializable {
   @EmbeddedId
   private ProfileInfoPK id;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "profile_id", referencedColumnName = "id", updatable = false,
       insertable = false)
