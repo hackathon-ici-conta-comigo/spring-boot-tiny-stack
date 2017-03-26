@@ -3,12 +3,28 @@
       <input type="text" ng-model="vm.city" name="city" 
           class="form-control" id="inputText1" placeholder="Endereço" required="true">
     </div>
+    <div class="form-group text-right">
         <button type="button" class="btn btn-default btn-success"
             ng-click="vm.search()">Pesquisar</span>
         </button>
         <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-            <ui-gmap-markers models="vm.markers" coords="'self'" icon="'icon'" modelsByRef="false">
+            <ui-gmap-markers models="vm.markers" coords="'self'" icon="'icon'" modelsByRef="false" click="vm.select">
             </ui-gmap-markers>
         </ui-gmap-google-map>
     </div>
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Estudantes de {{$ctrl.city}}</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <ul>
+                <li ng-repeat="profile in $ctrl.profilesFiltered">
+                    <b>{{profile.user.firstName}}</b>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Fechar</button>
+        </div>
+    </script>
 </div>

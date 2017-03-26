@@ -25,9 +25,10 @@ public class ProfilesByFiltersSpecification implements Specification<Profile> {
 
     @Override
     public Predicate toPredicate(Root<Profile> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-        Predicate predicate = cb.disjunction();
+        Predicate predicate = cb.conjunction();
+        predicate.getExpressions().add(cb.and(cb.equal(root.join("user").join("roles").get("name"), "ALUNO")));
         if (name != null && !name.trim().isEmpty()) {
-            predicate.getExpressions().add(cb.equal(root.<User>get("user").get("firstName"), name));
+            predicate.getExpressions().add(cb.and(cb.equal(root.<User>get("user").get("firstName"), name)));
         }
         if (null != period && null != period.getInitialDate() && null != period.getEndDate()) {
             predicate.getExpressions()
@@ -38,9 +39,9 @@ public class ProfilesByFiltersSpecification implements Specification<Profile> {
             for (final String string : city.split(" ")) {
                 final String statement = "%" + string + "%";
                 predicate.getExpressions()
-                        .add(cb.or(cb.like(root.get("address").get("city"), statement),
+                        .add(cb.and(cb.or(cb.like(root.get("address").get("city"), statement),
                                 cb.like(root.get("address").get("street"), statement),
-                                cb.like(root.get("address").get("country"), statement)));
+                                cb.like(root.get("address").get("country"), statement))));
             }
         }
         return predicate;

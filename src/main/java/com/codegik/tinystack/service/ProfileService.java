@@ -28,61 +28,56 @@ import com.codegik.tinystack.repository.specification.ProfilesByFiltersSpecifica
 @Transactional
 public class ProfileService {
 
+    @Inject
+    private ProfileRepository profileRepository;
 
+    @Inject
+    private InfoRepository InfoRepository;
 
-  @Inject
-  private ProfileRepository profileRepository;
+    @Transactional(readOnly = true)
+    public List<ProfileDTO> findAllByFilters(String name, Period period, String city) {
+        final List<Profile> list = profileRepository.findAll(new ProfilesByFiltersSpecification(name, period, city));
+        List<ProfileDTO> result = new ArrayList<>(list.size());
+        for (Profile profile : list) {
+            result.add(ProfileDTO.create().withAge(profile.getBirthday())
+                    .withUser(UserDTO.create().withFirstName(profile.getUser().getFirstName()))
+                    .withAddress(profile.getAddress()));
+        }
 
-
-  @Inject
-  private InfoRepository InfoRepository;
-
-  @Transactional(readOnly = true)
-  public List<ProfileDTO> findAllByFilters(String name, Period period, String city) {
-    final List<Profile> list =
-        profileRepository.findAll(new ProfilesByFiltersSpecification(name, period, city));
-    List<ProfileDTO> result = new ArrayList<>(list.size());
-    for (Profile profile : list) {
-      result.add(ProfileDTO.create()
-          .withUser(UserDTO.create().withFirstName(profile.getUser().getFirstName()))
-          .withAddress(profile.getAddress()));
+        return result;
     }
 
-    return result;
-  }
+    public Profile create(final Profile profile) {
+        profile.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+        profile.getUser().withId(UUID.randomUUID().toString().replaceAll("-", ""));
+        for (ProfileInfo profileInfo : profile.getInformations()) {
+            Info persistedInfo = InfoRepository.findOne(profileInfo.getInfo().getName());
+            profileInfo.withId(
+                    ProfileInfoPK.create().withInfoId(profileInfo.getInfo().getName()).withProfileId(profile.getId()));
 
-  public Profile create(final Profile profile) {
-    profile.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-    profile.getUser().withId(UUID.randomUUID().toString().replaceAll("-", ""));
-    for (ProfileInfo profileInfo : profile.getInformations()) {
-      Info persistedInfo = InfoRepository.findOne(profileInfo.getInfo().getName());
-      profileInfo.withId(ProfileInfoPK.create().withInfoId(profileInfo.getInfo().getName())
-          .withProfileId(profile.getId()));
+            if (persistedInfo == null) {
+                InfoRepository.save(profileInfo.getInfo());
+            }
 
-      if (persistedInfo == null) {
-        InfoRepository.save(profileInfo.getInfo());
-      }
+        }
 
+        for (ProfileAnswer answer : profile.getAnswers()) {
+            answer.withId(ProfileAnswerPK.create().withQuestionId(answer.getQuestion().getId())
+                    .withProfileId(profile.getId()));
+        }
+
+        return profileRepository.save(profile);
     }
 
-
-    for (ProfileAnswer answer : profile.getAnswers()) {
-      answer.withId(ProfileAnswerPK.create().withQuestionId(answer.getQuestion().getId())
-          .withProfileId(profile.getId()));
+    public Page<Profile> findAll(Pageable pageable) {
+        Page<Profile> page = profileRepository.findAll(pageable);
+        page.forEach(profile -> {
+            profile.getAnswers();
+            profile.getUser();
+            profile.getInformations();
+            profile.getAddress();
+        });
+        return profileRepository.findAll(pageable);
     }
-
-    return profileRepository.save(profile);
-  }
-
-  public Page<Profile> findAll(Pageable pageable) {
-    Page<Profile> page = profileRepository.findAll(pageable);
-    page.forEach(profile -> {
-      profile.getAnswers();
-      profile.getUser();
-      profile.getInformations();
-      profile.getAddress();
-    });
-    return profileRepository.findAll(pageable);
-  }
 
 }
