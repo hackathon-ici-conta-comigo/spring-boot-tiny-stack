@@ -1,76 +1,45 @@
-<div id="carousel-example-generic"
-	style="min-height: 450px; max-height: 430px" class="carousel slide"
-	data-ride="carousel">
-	<div class="carousel-inner">
-		<div class="item active">
-			<div class="container text-center">
-				<img src="https://placehold.it/350x150" alt="Logo"
-					style="text-align: center">
-				<h1>Juntos Venceremos</h1>
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<p class="text-center">O Instituto do Câncer Infantil trabalha
-						com jovens de até 19 anos, que passam muito tempo em tratamento
-						devido à esta doença e acabam parando de estudar e não conseguem
-						oportunidades de trabalho. Outra situação recorrente é a falta de
-						orientação psicológica. Com esta situação surgiu a ideia de uma
-						plataforma, chamada Conta Comigo, que busca auxiliar estas pessoas
-						a retomar o rumo da sua vida para atingir os seus objetivos e
-						sonhos e não deixar que a doença abale o seu futuro. Conheça mais
-						sobre o Instituto do Câncer Infantil Aqui:</p>
-
-					<a href="https://www.ici-rs.org.br" class="btn btn-success">Acessar</a>
-				</div>
-				<div class="col-md-2"></div>
-			</div>
+<div class="row" id="carousel-bg">
+	<div class="container" style="margin-top: 30px">
+		<div class="col-lg-4"></div>
+		<div class="col-lg-4">
+			<a ui-sref="home"><img src="assets/images/logo.png" alt="Logo"
+				width="350" height="150"></a>
 		</div>
-		<div class="item">
-			<div class="container text-center">
-				<img src="https://placehold.it/350x150" alt="Logo"
-					style="text-align: center">
-				<h1>Lorem Ipsum</h1>
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<p class="text-center">Lorem ipsum dolor sit amet, consectetur
-						adipiscing elit. Proin tristique nisi lacus, nec rhoncus felis
-						porttitor id. Proin vitae placerat ex. Nullam at libero nibh.
-						Fusce lobortis maximus augue, at consectetur diam tristique eu.
-						Aenean eu velit lectus. Pellentesque gravida mauris eget mi
-						commodo, non porta nibh aliquet.</p>
+		<div class="col-lg-4"></div>
 
-					<a href="#" class="btn btn-success">CADASTRE-SE</a>
-				</div>
-				<div class="col-md-2"></div>
-			</div>
-		</div>
-		<div class="item">
-			<div class="container text-center">
-				<img src="https://placehold.it/350x150" alt="Logo"
-					style="text-align: center">
-				<h1>Lorem Ipsum</h1>
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<p class="text-center">Lorem ipsum dolor sit amet, consectetur
-						adipiscing elit. Proin tristique nisi lacus, nec rhoncus felis
-						porttitor id. Proin vitae placerat ex. Nullam at libero nibh.
-						Fusce lobortis maximus augue, at consectetur diam tristique eu.
-						Aenean eu velit lectus. Pellentesque gravida mauris eget mi
-						commodo, non porta nibh aliquet.</p>
-
-					<a href="#" class="btn btn-success">CADASTRE-SE</a>
-				</div>
-				<div class="col-md-2"></div>
-			</div>
-		</div>
 	</div>
-	<a class="left carousel-control" href="#carousel-example-generic"
-		role="button" data-slide="prev"> <span
-		class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
-		class="sr-only">Previous</span>
-	</a> <a class="right carousel-control" href="#carousel-example-generic"
-		role="button" data-slide="next"> <span
-		class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span
-		class="sr-only">Next</span>
-	</a>
+	<div id="carousel" class="carousel slide" data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="item active bg-carousel-estudo">
+				<div class="container text-center"
+					style="padding: 30px 0; min-height: 320px;">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<h2 style="padding: 30px 0px">Você já usou suas forças nessa
+							batalha, agora conta comigo!</h2>
+						<a ui-sref="register" class="btn btn-success">Cadastre-se</a>
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+			</div>
+			<div class="item bg-carousel-ici">
+				<div class="container text-center" style="min-height: 320px;">
+					<a href="https://www.ici-rs.org.br/" class="btn btn-primary" style="position:absolute; bottom:0; margin-left:-80px">Acessar</a>
+				</div>
+			</div>
+			<div class="item bg-carousel-selo">
+				<div class="container text-center" style="min-height: 320px;">
+				</div>
+			</div>
+		</div>
+		<a class="left carousel-control" href="#carousel" role="button"
+			data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
+			aria-hidden="true"></span> <span class="sr-only">Previous</span>
+		</a> <a class="right carousel-control" href="#carousel" rel="nofolow"
+			role="button" data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
 
+	</div>
 </div>

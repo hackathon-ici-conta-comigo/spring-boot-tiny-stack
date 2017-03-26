@@ -13,7 +13,7 @@
 					templateUrl : 'app/home/home.html'
 				},
 				'header@' : {
-					templateUrl : 'app/carousel/carousel.html'
+					templateUrl : 'app/carousel/carousel.html'						
 				}
 			}
 		})
@@ -21,7 +21,9 @@
 			url : "/register",
 			views : {
 				'content@' : {
-					templateUrl : 'app/register/register.html'
+					templateUrl : 'app/register/register.html',
+					controller: 'RegisterController',
+					controllerAs: 'vm'
 				},
 				'header@' : {
 					templateUrl : 'app/carousel/carousel.html'
