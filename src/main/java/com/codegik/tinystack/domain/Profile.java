@@ -37,7 +37,7 @@ public class Profile implements Serializable {
   @JoinColumn(name = "user_id")
   private User user;
 
-  @OneToMany
+  @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
   private List<ProfileInfo> informations;
 
   @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)

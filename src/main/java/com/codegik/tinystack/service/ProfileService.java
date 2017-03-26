@@ -1,5 +1,6 @@
 package com.codegik.tinystack.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +19,8 @@ import com.codegik.tinystack.domain.ProfileAnswer;
 import com.codegik.tinystack.domain.ProfileAnswer.ProfileAnswerPK;
 import com.codegik.tinystack.domain.ProfileInfo;
 import com.codegik.tinystack.domain.ProfileInfo.ProfileInfoPK;
+import com.codegik.tinystack.domain.dto.ProfileDTO;
+import com.codegik.tinystack.domain.dto.UserDTO;
 import com.codegik.tinystack.repository.InfoRepository;
 import com.codegik.tinystack.repository.ProfileRepository;
 import com.codegik.tinystack.repository.RoleRepository;
