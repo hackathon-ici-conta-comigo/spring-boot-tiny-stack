@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('app', [ 'ui.router', 'ngResource' ]).run(run);
+	angular.module('app', [ 'ui.router', 'ngResource', 'uiGmapgoogle-maps' ]).run(run);
 
 	function run() {
 	}

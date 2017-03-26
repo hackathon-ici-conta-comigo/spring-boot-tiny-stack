@@ -6675,3 +6675,6 @@ ul.instagram-photos li {
   margin: 4px; }
   ul.instagram-photos li img {
     margin: 0; }
+    
+.angular-google-map-container { height: 800px; }
+

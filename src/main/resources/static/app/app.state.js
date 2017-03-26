@@ -46,7 +46,16 @@
 					templateUrl : 'app/admin/admin.html'
 				}
 			}
-		});
+		}).state('search', {
+            url : "/search",
+            views : {
+                'content@' : {
+                    templateUrl : 'app/search/search.html',
+                    controller : 'SearchController',
+                    controllerAs : 'vm'
+                }
+            }
+        });
 
 	}
 })();

@@ -1,0 +1,25 @@
+<div class="section">
+    <h3>Pesquisa</h3>
+    <div>
+        Nome:
+        <input type="text" ng-model="vm.name">
+        
+        Faixa-Etária
+        de:
+        <input type="number" ng-model="vm.initialAgeGroup">
+        até
+        <input type="number" ng-model="vm.endAgeGroup">
+        
+        Cidade:
+        <input type="text" ng-model="vm.city">
+        
+        
+        <input type="button" value="Submit" ng-click="vm.search()">
+        
+        
+        <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
+            <ui-gmap-markers models="vm.markers" icon="'icon'">
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+    </div>
+</div>
