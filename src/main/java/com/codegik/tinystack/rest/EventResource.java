@@ -55,4 +55,10 @@ public class EventResource {
 		eventService.delete(id);
 		return ResponseEntity.ok().build();
 	}
+	
+	@DeleteMapping("/eventparticipant/{eventId}/{id}")
+	public ResponseEntity<Void> deleteParticipant(@PathVariable String eventId, @PathVariable String id) {
+		eventService.deleteParticipant(eventId, id);
+		return ResponseEntity.ok().build();
+	}
 }

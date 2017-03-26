@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.codegik.tinystack.domain.Event;
+import com.codegik.tinystack.repository.EventParticipantRepository;
 import com.codegik.tinystack.repository.EventRepository;
 
 @Service
@@ -16,6 +17,9 @@ public class EventService {
 
 	@Inject
 	private EventRepository eventRepository;
+	
+	@Inject
+	private EventParticipantRepository eventParticipantRepository;
 
 
 	public Event create(final Event event) {
@@ -39,5 +43,9 @@ public class EventService {
 	
 	public void delete(String id) {
 		eventRepository.delete(id);
+	}
+	
+	public void deleteParticipant(String eventId, String id) {
+		eventParticipantRepository.deleteByEventIdAndId(eventId, id);
 	}
 }

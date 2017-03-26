@@ -55,6 +55,23 @@
 					templateUrl : 'app/event/event.html',
 					controller : 'EventController',
 					controllerAs : 'vm'
+				},
+				'header@' : {
+					templateUrl : 'app/carousel/carousel.html'						
+				}
+			}
+		})
+		.state('event-detail', {
+			parent: 'event',
+			url : "/{id}/edit",
+			views : {
+				'content@' : {
+					templateUrl : 'app/event/event-detail.html',
+					controller : 'EventDetailController',
+					controllerAs : 'vm'
+				},
+				'header@' : {
+					templateUrl : 'app/carousel/carousel.html'						
 				}
 			}
 		});

@@ -2,14 +2,14 @@
 	'use strict';
 
 	angular.module('app').controller('EventController', EventController);
-	EventController.$inject = [];
+	EventController.$inject = ['EventServiceQuery'];
 
-	function EventController() {
+	function EventController(EventServiceQuery) {
 		var vm = this;
 		vm.events = [];
 
 		vm.loadAll = function() {
-			EventService.findAll(function(data) {
+			EventServiceQuery.findAll(function(data) {
 				vm.events = data;
 			});
 		};

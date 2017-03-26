@@ -6,5 +6,4 @@ import com.codegik.tinystack.domain.Event;
 
 public interface EventRepository extends JpaRepository<Event, String> {
 
-    
 }

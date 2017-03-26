@@ -2,34 +2,28 @@
 	'use strict';
 
 	angular.module('app').factory('EventServiceQuery', EventServiceQuery);
-	angular.module('app').factory('EventService', EventService);
+	angular.module('app').factory('EventServiceDeleteParticipant', EventServiceDeleteParticipant);
 
 	EventServiceQuery.$inject = [ '$resource' ];
-	EventService.$inject = [ '$resource' ];
+	EventServiceDeleteParticipant.$inject = [ '$resource' ];
 
 	function EventServiceQuery($resource) {
-		var service = $resource('api/events', {}, {
+		var service = $resource('api/events/:id', {}, {
 			'findAll' : {
 				method : 'GET',
 				isArray : true
-			}
+			},
+			'get': {
+                method: 'GET'
+            }
 		});
 
 		return service;
 	}
 	
-	function EventService($resource) {
-		var service = $resource('api/events/:id', {id: '@id'}, {
-			'findOne' : {
-				method : 'GET',
-				params: {id: id}
-			},
-			'delete' : {
-				method : 'DELETE',
-				params: {id: id}
-			}
-		});
+	function EventServiceDeleteParticipant($resource) {
+		var service = $resource('api/eventparticipant/:eventId/:id', {}, {});
 
-		return service;
+		return service;		
 	}
 })();
