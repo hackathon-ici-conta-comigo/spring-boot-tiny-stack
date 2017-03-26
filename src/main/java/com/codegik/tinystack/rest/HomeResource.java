@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeResource {
 
-	@GetMapping("/")
-	public void homepage(HttpServletResponse response) throws IOException {
-		response.sendRedirect("index.html");
-	}
+  @GetMapping("/")
+  public void homepage(HttpServletResponse response) throws IOException {
+    response.sendRedirect("index.html");
+  }
 }

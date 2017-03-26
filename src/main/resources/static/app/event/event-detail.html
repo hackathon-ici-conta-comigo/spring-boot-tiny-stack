@@ -11,23 +11,31 @@
 
 		<div class="form-group">
 			<label for="description">Descrição</label> <input type="text"
-				name="description" ng-model="vm.event.description" class="form-control"
-				id="description" placeholder="Descrição">
+				name="description" ng-model="vm.event.description"
+				class="form-control" id="description" placeholder="Descrição">
 		</div>
-		
+
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th><span>Participante</span></th>
-					<th></th>
+					<th><button type="submit" ng-click="vm.addParticipant()"
+							class="btn btn-success btn-sm"
+							style="float:right">
+							<span class="glyphicon glyphicon-plus"></span> <span
+								class="hidden-xs hidden-sm"></span>
+						</button></th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="participant in vm.event.participants track by participant.participant.id">
-					<td>{{participant.participant.firstName}} {{participant.lastName}}</td>
+				<tr
+					ng-repeat="participant in vm.event.participants track by participant.participant.id">
+					<td>{{participant.participant.firstName}}
+						{{participant.lastName}}</td>
 					<td class="text-right">
 						<div class="btn-group flex-btn-group-container">
-							<button type="submit" ng-click="vm.deleteParticipant({id:participant.participant.id, eventId:vm.event.id})"
+							<button type="submit"
+								ng-click="vm.deleteParticipant({id:participant.participant.id, eventId:vm.event.id})"
 								class="btn btn-danger btn-sm">
 								<span class="glyphicon glyphicon-remove-circle"></span> <span
 									class="hidden-xs hidden-sm">Delete</span>

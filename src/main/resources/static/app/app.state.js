@@ -5,8 +5,20 @@
 
 	stateConfig.$inject = [ '$stateProvider'];
 
-	function stateConfig($stateProvider, $urlRouterProvider) {
-		$stateProvider.state('home', {
+	function stateConfig($stateProvider) {
+		$stateProvider
+		.state('index', {
+			url : "/#",
+			views : {
+				'content@' : {
+					templateUrl : 'app/home/home.html'
+				},
+				'header@' : {
+					templateUrl : 'app/carousel/carousel.html'						
+				}
+			}
+		})
+		.state('home', {
 			url : "/home",
 			views : {
 				'content@' : {
@@ -83,7 +95,20 @@
 					templateUrl : 'app/carousel/carousel.html'						
 				}
 			}
+        })
+        .state('event-new', {
+			parent: 'event',
+			url : "/new",
+			views : {
+				'content@' : {
+					templateUrl : 'app/event/event-detail.html',
+					controller : 'EventDetailController',
+					controllerAs : 'vm'
+				},
+				'header@' : {
+					templateUrl : 'app/carousel/carousel.html'						
+				}
+			}
         });
-
 	}
 })();
