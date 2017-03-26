@@ -31,7 +31,7 @@ public class EventResource {
 	@Inject
 	private EventService eventService;
 
-	@PostMapping("/event")
+	@PostMapping("/events")
 	public ResponseEntity<Event> create(@Valid @RequestBody Event event) {
 		return new ResponseEntity<Event>(eventService.create(event), HttpStatus.OK);
 	}
@@ -44,7 +44,7 @@ public class EventResource {
 	}
 
 	@GetMapping("/events/{id}")
-	public ResponseEntity<Event> getSalesItem(@PathVariable String id) {
+	public ResponseEntity<Event> findOne(@PathVariable String id) {
 		Event event = eventService.findOne(id);
 		return Optional.ofNullable(event).map(result -> new ResponseEntity<>(result, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

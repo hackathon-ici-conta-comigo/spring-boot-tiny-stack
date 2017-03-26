@@ -39,14 +39,24 @@
 					controllerAs : 'vm'
 				}
 			}
-		}).state('admin', {
+		})
+		.state('admin', {
 			url : "/admin",
 			views : {
 				'content@' : {
 					templateUrl : 'app/admin/admin.html'
 				}
 			}
+		})
+		.state('event', {
+			url : "/event",
+			views : {
+				'content@' : {
+					templateUrl : 'app/event/event.html',
+					controller : 'EventController',
+					controllerAs : 'vm'
+				}
+			}
 		});
-
 	}
 })();
