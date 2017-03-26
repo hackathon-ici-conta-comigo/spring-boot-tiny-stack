@@ -10,25 +10,34 @@ import org.springframework.transaction.annotation.Transactional;
 import com.codegik.tinystack.domain.Event;
 import com.codegik.tinystack.repository.EventRepository;
 
-
 @Service
 @Transactional
 public class EventService {
-	
+
 	@Inject
 	private EventRepository eventRepository;
+
+
+	public Event create(final Event event) {
+		event.generateId();
+
+		event.getParticipants().forEach(participant -> {
+			participant.generateId();
+			participant.setEvent(event);
+		});
+
+		return eventRepository.save(event);
+	}
+
+	public Page<Event> findAll(Pageable pageable) {
+		return eventRepository.findAll(pageable);
+	}
+
+	public Event findOne(String id) {
+		return eventRepository.findOne(id);
+	}
 	
-    public Event create(final Event event) {
-    	event.generateId();
-    	
-        return eventRepository.save(event);
-    }
-    
-    public Page<Event> findAll(Pageable pageable) {
-    	return eventRepository.findAll(pageable);
-    }
-    
-    public Event findOne(String id) {
-    	return eventRepository.findOne(id);
-    }
+	public void delete(String id) {
+		eventRepository.delete(id);
+	}
 }

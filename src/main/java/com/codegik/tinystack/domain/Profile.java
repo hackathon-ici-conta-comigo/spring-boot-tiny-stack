@@ -37,10 +37,10 @@ public class Profile implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "profile")
     private List<ProfileInfo> informations;
 
-    @OneToMany
+    @OneToMany(mappedBy = "profile")
     private List<ProfileAnswer> answers;
 
     public Profile generateId() {

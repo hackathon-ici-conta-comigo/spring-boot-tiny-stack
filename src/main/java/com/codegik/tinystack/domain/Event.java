@@ -3,10 +3,10 @@ package com.codegik.tinystack.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,11 +32,11 @@ public class Event implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "promoter_id")
     private User promoter;
 
-    @OneToMany
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<EventParticipant> participants;
 
     @Embedded
