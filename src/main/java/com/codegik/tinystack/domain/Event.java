@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.codegik.tinystack.domain.uuid.IdentifierGenerator;
 
@@ -24,6 +25,7 @@ public class Event implements Serializable {
     @Id
     private String id;
 
+    @NotNull
     @Column(name = "name")
     private String name;
 
