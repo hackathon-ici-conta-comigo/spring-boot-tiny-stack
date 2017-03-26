@@ -1,5 +1,6 @@
 package com.codegik.tinystack.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -9,14 +10,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codegik.tinystack.domain.Period;
 import com.codegik.tinystack.domain.Profile;
 import com.codegik.tinystack.domain.ProfileAnswer;
 import com.codegik.tinystack.domain.ProfileAnswer.ProfileAnswerPK;
 import com.codegik.tinystack.domain.ProfileInfo;
 import com.codegik.tinystack.domain.ProfileInfo.ProfileInfoPK;
+import com.codegik.tinystack.repository.InfoRepository;
 import com.codegik.tinystack.repository.ProfileRepository;
 import com.codegik.tinystack.repository.RoleRepository;
 import com.codegik.tinystack.repository.UserRepository;
+import com.codegik.tinystack.repository.specification.ProfilesByFiltersSpecification;
 
 @Service
 @Transactional
@@ -32,18 +36,31 @@ public class ProfileService {
 
 	@Inject
 	private RoleRepository roleRepository;
+	
+	@Inject
+	private InfoRepository InfoRepository;
+
+	@Transactional(readOnly = true)
+	public List<Profile> findAllByFilters(String name, Period period, String city) {
+		return profileRepository.findAll(new ProfilesByFiltersSpecification(name, period, city));
+	}
 
 	public Profile create(final Profile profile) {
 		profile.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 		profile.getUser().withId(UUID.randomUUID().toString().replaceAll("-", ""));
+		for (ProfileInfo profileInfo : profile.getInformations()) {	
+			profileInfo.withId(ProfileInfoPK.create().withInfoId(profileInfo.getInfo().getName())
+					.withProfileId(profile.getId()));
+			InfoRepository.save(profileInfo.getInfo());
+			
+		}
+	
+		
 		for (ProfileAnswer answer : profile.getAnswers()) {
 			answer.withId(ProfileAnswerPK.create().withQuestionId(answer.getQuestion().getId())
-					.withProfileId(profile.getId())).withProfile(profile);
+					.withProfileId(profile.getId()));
 		}
-		for (ProfileInfo infos : profile.getInformations()) {
-			infos.withId(ProfileInfoPK.create().withInfoId(UUID.randomUUID().toString().replaceAll("-", ""))
-					.withProfileId(profile.getId())).withProfile(profile);
-		}
+		
 		return profileRepository.save(profile);
 	}
 

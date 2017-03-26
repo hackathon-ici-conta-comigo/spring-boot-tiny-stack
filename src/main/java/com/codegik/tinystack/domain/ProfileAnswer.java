@@ -68,6 +68,8 @@ public class ProfileAnswer implements Serializable {
     @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Question question;
+    
+    private String answer;
 
     public ProfileAnswerPK getId() {
         return id;
@@ -92,8 +94,16 @@ public class ProfileAnswer implements Serializable {
     public void setQuestion(Question question) {
         this.question = question;
     }
+      
+    public String getAnswer() {
+		return answer;
+	}
 
-    public static synchronized ProfileAnswer create() {
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	public static synchronized ProfileAnswer create() {
         return new ProfileAnswer();
     }
 
