@@ -6,13 +6,21 @@
 
 	function UserController() {
 		var vm = this;
+		vm.submit = function(form) {
+			if (form.$valid) {
+				console.log(vm.form);
+			}
+		}
 
-		vm.loadAll = function() {
-			UserService.findAll(function(data) {
-				vm.users = data;
-			});
+		vm.informations = [];
+		vm.addNewInformation = function() {
+			vm.informations.push('');
+		};
+		
+		
+		vm.removeInformation = function(z) {
+			$scope.choiceSet.choices.splice(z, 1);
 		};
 
-		vm.loadAll();
 	}
 })();
