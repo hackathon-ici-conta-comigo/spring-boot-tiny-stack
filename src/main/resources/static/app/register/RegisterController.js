@@ -81,6 +81,9 @@
 					"name" : "ALUNO"
 				});
 
+				
+				vm.form.birthday = new Date(vm.form.birthday);
+				
 				$http.post('api/profile', vm.form).then(function(response) {
 					vm.success = true;
 				}, function(error) {
