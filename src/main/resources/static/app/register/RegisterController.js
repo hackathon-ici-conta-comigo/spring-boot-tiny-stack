@@ -28,12 +28,10 @@
 
 				vm.form.informations = [];
 
-				// vm.interests.map(function(m){return {info: m.info,
-				// type:'INTEREST'} })
 				vm.interests.forEach(function(m) {
 					vm.form.informations.push({
 						"info" : {
-							name : m.info,
+							name : m.info.name,
 							type : 'INTEREST'
 						}
 					})
@@ -41,7 +39,7 @@
 				vm.experiences.forEach(function(m) {
 					vm.form.informations.push({
 						"info" : {
-							name : m.info,
+							name : m.info.name,
 							type : 'EXPERIENCE'
 						}
 					})
@@ -49,7 +47,7 @@
 				vm.habilities.forEach(function(m) {
 					vm.form.informations.push({
 						"info" : {
-							name : m.info,
+							name : m.info.name,
 							type : 'HABILITY'
 						}
 					})
@@ -57,28 +55,35 @@
 				vm.dificulties.forEach(function(m) {
 					vm.form.informations.push({
 						"info" : {
-							name : m.info,
+							name : m.info.name,
 							type : 'DIFICULTY'
 						}
 					})
 				});
 
-				vm.success = true;
-
-
 				vm.form.answers = [];
-				vm.answers.forEach(function(value, key) {
+
+				for ( var i in vm.answers) {
 					vm.form.answers.push({
 						"question" : {
-							id : key,
-							question : value.question
-						}
-					});
-				});
-				
+							id : i
+						},
+						"answer" : vm.answers[i].question
+					})
+				}
+
 				vm.form.user.roles = [];
-				vm.form.user.roles.push({"name": "ALUNO"});
-				
+				vm.form.user.roles.push({
+					"name" : "ALUNO"
+				});
+
+				$http.post('api/profile', vm.form).then(function(response) {
+					vm.success = true;
+				}, function(error) {
+					console.error(error);
+				});
+
+				console.log(vm.form);
 			}
 		}
 

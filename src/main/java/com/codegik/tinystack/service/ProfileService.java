@@ -18,7 +18,6 @@ import com.codegik.tinystack.domain.ProfileAnswer;
 import com.codegik.tinystack.domain.ProfileAnswer.ProfileAnswerPK;
 import com.codegik.tinystack.domain.ProfileInfo;
 import com.codegik.tinystack.domain.ProfileInfo.ProfileInfoPK;
-import com.codegik.tinystack.domain.Role;
 import com.codegik.tinystack.repository.InfoRepository;
 import com.codegik.tinystack.repository.ProfileRepository;
 import com.codegik.tinystack.repository.RoleRepository;
@@ -67,8 +66,8 @@ public class ProfileService {
     return profileRepository.save(profile);
   }
 
-  public Page<Profile> findAllByRole(Role role, Pageable pageable) {
-    return profileRepository.findAllByRole(pageable, role);
+  public Page<Profile> findAll(Pageable pageable) {
+    return profileRepository.findAll(pageable);
   }
 
 }

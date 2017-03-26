@@ -43,7 +43,7 @@ public class ProfileResource {
   public ResponseEntity<List<Profile>> findAll(Pageable pageable) throws URISyntaxException {
     Role role = new Role();
     role.setName("ALUNO");
-    Page<Profile> page = profileService.findAllByRole(role, pageable);
+    Page<Profile> page = profileService.findAll(pageable);
     HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/profiles");
     return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
   }
