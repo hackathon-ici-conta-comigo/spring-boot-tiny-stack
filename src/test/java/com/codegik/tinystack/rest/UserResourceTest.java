@@ -55,7 +55,7 @@ public class UserResourceTest {
 
 		restUserMockMvc.perform(get("/api/users").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-				.andExpect(jsonPath("$.[*].id").value(hasItem(user.getId().intValue())))
+				.andExpect(jsonPath("$.[*].id").value(hasItem(user.getId())))
 				.andExpect(jsonPath("$.[*].email").value(hasItem(user.getEmail())))
 				.andExpect(jsonPath("$.[*].password").doesNotExist());
 	}
