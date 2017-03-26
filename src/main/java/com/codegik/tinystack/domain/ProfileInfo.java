@@ -62,11 +62,11 @@ public class ProfileInfo implements Serializable {
     private ProfileInfoPK id;
 
     @ManyToOne
-    @JoinColumn(name = "profile_id", updatable = false, insertable = false)
+    @JoinColumn(name = "profile_id", referencedColumnName = "id", updatable = false, insertable = false)
     private Profile profile;
 
     @ManyToOne
-    @JoinColumn(name = "info_id", updatable = false, insertable = false)
+    @JoinColumn(name = "info_id", referencedColumnName = "id", updatable = false, insertable = false)
     private Info info;
 
     public ProfileInfoPK getId() {

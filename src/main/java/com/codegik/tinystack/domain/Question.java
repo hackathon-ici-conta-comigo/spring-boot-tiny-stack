@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.codegik.tinystack.domain.uuid.IdentifierGenerator;
+
 @Entity
 @Table(name = "question")
 public class Question implements Serializable {
@@ -19,6 +21,11 @@ public class Question implements Serializable {
 
     @Column(name = "question")
     private String question;
+
+    public Question generateId() {
+        id = IdentifierGenerator.generate();
+        return this;
+    }
 
     public String getId() {
         return id;

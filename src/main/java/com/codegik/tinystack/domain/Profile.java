@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.codegik.tinystack.domain.uuid.IdentifierGenerator;
+
 @Entity
 @Table(name = "profile")
 public class Profile implements Serializable {
@@ -40,6 +42,11 @@ public class Profile implements Serializable {
 
     @OneToMany
     private List<ProfileAnswer> answers;
+
+    public Profile generateId() {
+        id = IdentifierGenerator.generate();
+        return this;
+    }
 
     public String getId() {
         return id;

@@ -31,9 +31,8 @@ public class UserService {
     private RoleRepository roleRepository;
 
     public Profile create(final Profile profile) {
-        profile.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-        profile.getUser().withId(UUID.randomUUID().toString().replaceAll("-", ""))
-                         .withRoles(new ArrayList<>(1));
+        profile.generateId();
+        profile.getUser().generateId().withRoles(new ArrayList<>(1));
         profile.getUser().getRoles().add(roleRepository.findOne("EMPRESA"));
         return profileRepository.save(profile);
     }
