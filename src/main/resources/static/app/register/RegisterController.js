@@ -11,12 +11,16 @@
 		vm.answers = [];
 		vm.success = false;
 
-		$http.get('api/questions').then(function(response) {
-			vm.questions = response.data;
-			console.log(vm.questions);
-		}, function(error) {
-			console.error(error);
-		});
+		$http
+				.get('api/questions')
+				.then(function(response) {
+							vm.emailExiste = false;
+							vm.questions = response.data;
+							console.log(vm.questions);
+						},
+						function(error) {
+							console.error(error);
+						});
 
 		vm.submit = function(form) {
 			if (form.$valid) {
@@ -80,6 +84,10 @@
 				$http.post('api/profile', vm.form).then(function(response) {
 					vm.success = true;
 				}, function(error) {
+					vm.emailExiste = false;
+					if (error.data.exception === "org.springframework.dao.DataIntegrityViolationException") {
+						vm.emailExiste = true;
+					}
 					console.error(error);
 				});
 
